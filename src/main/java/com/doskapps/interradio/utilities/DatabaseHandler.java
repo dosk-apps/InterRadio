@@ -72,7 +72,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
@@ -137,7 +136,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Data
     public List<Radio> getAllData() {
-        List<Radio> dataList = new ArrayList<Radio>();
+        List<Radio> dataList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE locale='"+ Constant.LOCALE +"' ORDER BY id DESC";
 
@@ -159,6 +158,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 // Adding contact to list
                 dataList.add(contact);
             } while (cursor.moveToNext());
+            cursor.close();
         }
 
         // return contact list
@@ -168,7 +168,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Data
     public List<Radio> getAllDataRecent() {
-        List<Radio> dataList = new ArrayList<Radio>();
+        List<Radio> dataList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT DISTINCT "+KEY_RADIOID+ ", " +
                                                 KEY_RADIO_NAME+ ", " +
@@ -197,6 +197,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 // Adding contact to list
                 dataList.add(radio);
             } while (cursor.moveToNext());
+            cursor.close();
         }
 
         // return radio recent list
@@ -206,7 +207,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //getting single row
     public List<Radio> getFavRow(String id) {
-        List<Radio> dataList = new ArrayList<Radio>();
+        List<Radio> dataList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE locale='" + Constant.LOCALE + "' AND radio_id=" + id;
 
@@ -229,6 +230,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 // Adding contact to list
                 dataList.add(contact);
             } while (cursor.moveToNext());
+            cursor.close();
         }
         // return contact list
         db.close();
@@ -237,7 +239,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //getting single row
     public List<Pais> getCountry() {
-        List<Pais> dataList = new ArrayList<Pais>();
+        List<Pais> dataList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_NAME_COUNTRY + "";
 
@@ -255,6 +257,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 // Adding contact to list
                 dataList.add(pais);
             } while (cursor.moveToNext());
+            cursor.close();
         }
         // return country list
         db.close();
